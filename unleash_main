@@ -1,0 +1,36 @@
+
+looptxz(){
+txz=`find ./ -maxdepth 1 -name "*.tar.xz"`;
+while [ -n "$txz" ];
+        do
+                for c in `find ./ -maxdepth 1 -name "*.tar.xz"`;
+                do
+                tar -xvJf "$c";
+                rm -f "$c"
+        done
+        txz=`find ./ -maxdepth 1 -name "*.tar.xz"`;
+done
+}
+
+
+
+
+
+
+main(){
+echo "initiazing unleash...";
+iniciator=`find ./ -maxdepth 1 \( -name "*.zip" -o -name "*.tar" -o -name "*.tgz" -o -name "*.tar.xz" \)|grep -v TSR`;
+while [ -n "$iniciator" ]
+        do
+                loopzip;
+                looptgz;
+                looptar;
+                looptxz;
+        iniciator=`find ./ -maxdepth 1 \( -name "*.zip" -o -name "*.tar" -o -name "*.tgz" -o -name "*.tar.xz" \)|grep -v TSR`;
+        done
+echo "all tasks have been done..."
+}
+
+
+main;
+
